@@ -59,6 +59,23 @@ class ShowAlert {
     );
   }
 
+  void showToastMessage({
+    required BuildContext context,
+    required int type,
+    required String title,
+    required String description,
+    Color? backgroundColor,
+  }) {
+    OverlayService().showOverlay(
+        context,
+        ToastMessageWidget(
+          type: type,
+          title: title,
+          description: description,
+          backgroundColor: backgroundColor,
+        ));
+  }
+
   void closeAlert() {
     OverlayService().removeOverlay();
   }
