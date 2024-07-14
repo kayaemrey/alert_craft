@@ -1,5 +1,5 @@
+import 'package:alert_craft/alert_craft.dart';
 import 'package:flutter/material.dart';
-import '../lib/alert_craft.dart';
 
 void main() {
   runApp(const ExampleApp());
