@@ -75,6 +75,9 @@ class ShowAlert {
           backgroundColor: backgroundColor,
         ));
   }
+  void showCustomAlert(BuildContext context,Widget widget){
+    OverlayService().showOverlay(context, widget);
+  }
 
   void closeAlert() {
     OverlayService().removeOverlay();

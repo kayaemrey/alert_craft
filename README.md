@@ -8,6 +8,7 @@ Alert Craft is a Flutter package designed to simplify the creation of customizab
 - **showLoadingDialog**:
 - **showSelectionDialog**:
 - **showToastMessage**:
+- **showCustomAlert**:
 - **closeAlert**:
 
 **Description:** Shows an alert dialog overlay with customizable title, description, and button options.
@@ -99,6 +100,12 @@ ShowAlert().showToastMessage(
   description: 'Operation completed successfully.',
   backgroundColor: Colors.green,
 );
+
+**Description:** Show Custom alert.
+
+**Usage Example:**
+```dart
+ShowAlert().showCustomAlert();
 
 **Description:** Closes the currently displayed alert overlay.
 
