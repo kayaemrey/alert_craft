@@ -20,7 +20,7 @@ class LoadingWidget extends StatelessWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                OverlayService().removeOverlay();
+                OverlayService().closeOverlay();
               },
               child: Container(color: Colors.black26.withOpacity(0.2)),
             ),

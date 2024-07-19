@@ -2,7 +2,6 @@ part of 'alert_craft.dart';
 
 class ShowAlert {
   void showAlertDialog({
-    required BuildContext context,
     required int type,
     required String title,
     required String description,
@@ -11,9 +10,8 @@ class ShowAlert {
     Color? buttonTextColor,
     Color? backgroundColor,
   }) {
-    OverlayService().showOverlay(
-      context,
-      AlertDialogWidget(
+    OverlayService().showCustomOverlay(
+      child: AlertDialogWidget(
         type: type,
         title: title,
         description: description,
@@ -26,11 +24,10 @@ class ShowAlert {
   }
 
   void showLoadingDialog(BuildContext context) {
-    OverlayService().showOverlay(context, const LoadingWidget());
+    OverlayService().showCustomOverlay(child: const LoadingWidget());
   }
 
   void showSelectionDialog({
-    required BuildContext context,
     required int type,
     required String title,
     required String description,
@@ -42,9 +39,8 @@ class ShowAlert {
     Function()? leftFunction,
     Function()? rightFunction,
   }) {
-    OverlayService().showOverlay(
-      context,
-      SelectionWidget(
+    OverlayService().showCustomOverlay(
+      child: SelectionWidget(
         type: type,
         title: title,
         description: description,
@@ -53,33 +49,32 @@ class ShowAlert {
         buttonColor: buttonColor,
         buttonTextColor: buttonTextColor,
         backgroundColor: backgroundColor,
-        leftFunction: leftFunction ?? () => OverlayService().removeOverlay(),
-        rightFunction: rightFunction ?? () => OverlayService().removeOverlay(),
+        leftFunction: leftFunction ?? () => OverlayService().closeOverlay(),
+        rightFunction: rightFunction ?? () => OverlayService().closeOverlay(),
       ),
     );
   }
 
   void showToastMessage({
-    required BuildContext context,
     required int type,
     required String title,
     required String description,
     Color? backgroundColor,
   }) {
-    OverlayService().showOverlay(
-        context,
-        ToastMessageWidget(
-          type: type,
-          title: title,
-          description: description,
-          backgroundColor: backgroundColor,
-        ));
+    OverlayService().showCustomOverlay(
+        child: ToastMessageWidget(
+      type: type,
+      title: title,
+      description: description,
+      backgroundColor: backgroundColor,
+    ));
   }
-  void showCustomAlert(BuildContext context,Widget widget){
-    OverlayService().showOverlay(context, widget);
+
+  void showCustomAlert(BuildContext context, Widget widget) {
+    OverlayService().showCustomOverlay(child: widget);
   }
 
   void closeAlert() {
-    OverlayService().removeOverlay();
+    OverlayService().closeOverlay();
   }
 }

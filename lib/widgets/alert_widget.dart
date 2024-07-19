@@ -57,7 +57,7 @@ class AlertDialogWidget extends StatelessWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                OverlayService().removeOverlay();
+                OverlayService().closeOverlay();
               },
               child: Container(color: Colors.black26.withOpacity(0.2)),
             ),
@@ -109,7 +109,7 @@ class AlertDialogWidget extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: buttonColor ?? Theme.of(context).primaryColor, minimumSize: const Size(120, 38), maximumSize: const Size(120, 38)),
                       onPressed: () {
-                        OverlayService().removeOverlay();
+                        OverlayService().closeOverlay();
                       },
                       child: Text(buttonText ?? 'Ok', style: TextStyle(color: buttonColor ?? Colors.white)),
                     ),

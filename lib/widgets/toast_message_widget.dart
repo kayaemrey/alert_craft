@@ -31,7 +31,7 @@ class _ToastMessageWidgetState extends State<ToastMessageWidget> {
 
   void _startTimer() {
     Timer(const Duration(seconds: 3), () {
-      OverlayService().removeOverlay();
+      OverlayService().closeOverlay();
     });
   }
 

@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
+import "package:get/get.dart";
+
+bool _haveOverlay = false;
 
 class OverlayService {
-  static final OverlayService _instance = OverlayService._internal();
+  static OverlayService? _instance;
+  final ValueNotifier<OverlayEntry?> _overlayEntry = ValueNotifier(null);
 
-  factory OverlayService() {
-    return _instance;
+  OverlayService._internal() {
+    _instance = this;
   }
 
-  OverlayService._internal();
+  factory OverlayService() => _instance ?? OverlayService._internal();
 
-  OverlayEntry? _overlayEntry;
+  void showCustomOverlay({
+    bool forceOverlay = false,
+    required Widget child,
+  }) {
+    if (forceOverlay) closeOverlay();
+    if (_haveOverlay) return;
+    OverlayState? overlayState = Get.key.currentState?.overlay;
+    if (overlayState == null) return;
 
-  void showOverlay(BuildContext context, Widget widget) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_overlayEntry != null) {
-        _overlayEntry!.remove();
-      }
+    final myoverlayEntry = OverlayEntry(
+      builder: (BuildContext context) {
+        return child;
+      },
+    );
+    _overlayEntry.value = myoverlayEntry;
 
-      _overlayEntry = OverlayEntry(builder: (context) => widget);
-
-      Overlay.of(context).insert(_overlayEntry!);
-    });
+    overlayState.insert(_overlayEntry.value!);
+    _haveOverlay = true;
   }
 
-  void removeOverlay() {
-    if (_overlayEntry != null) {
-      _overlayEntry!.remove();
-      _overlayEntry = null;
-    }
+  closeOverlay() {
+    if (_overlayEntry.value == null) return;
+    _haveOverlay = false;
+    _overlayEntry.value!.remove();
+    _overlayEntry.value = null;
   }
+
+  bool isInUse() => _overlayEntry.value != null;
 }

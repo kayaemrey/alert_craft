@@ -63,7 +63,7 @@ class SelectionWidget extends StatelessWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                OverlayService().removeOverlay();
+                OverlayService().closeOverlay();
               },
               child: Container(color: Colors.black26.withOpacity(0.2)),
             ),
@@ -118,7 +118,7 @@ class SelectionWidget extends StatelessWidget {
                           style: ElevatedButton.styleFrom(minimumSize: const Size(60, 38), maximumSize: const Size(120, 38)),
                           onPressed: leftFunction == null || leftFunction == () {}
                               ? () {
-                                  OverlayService().removeOverlay();
+                                  OverlayService().closeOverlay();
                                 }
                               : leftFunction,
                           child: Text(buttonTextLeft ?? 'Close', style: TextStyle(color: buttonColor ?? Colors.blue)),
@@ -128,7 +128,7 @@ class SelectionWidget extends StatelessWidget {
                               backgroundColor: buttonColor ?? Theme.of(context).primaryColor, minimumSize: const Size(60, 38), maximumSize: const Size(120, 38)),
                           onPressed: rightFunction == null || leftFunction == () {}
                               ? () {
-                                  OverlayService().removeOverlay();
+                                  OverlayService().closeOverlay();
                                 }
                               : rightFunction,
                           child: Text(buttonTextRight ?? 'Ok', style: TextStyle(color: buttonColor ?? Colors.white)),
