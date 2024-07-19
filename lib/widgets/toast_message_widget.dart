@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:alert_craft/service/screen_responsive_size.dart';
+import 'package:alert_craft/core/screen_responsive_size.dart';
 import 'package:flutter/material.dart';
 import '../service/overlay_service.dart';
 

@@ -3,11 +3,12 @@ import 'package:alert_craft/service/overlay_service.dart';
 import 'package:alert_craft/core/screen_responsive_size.dart';
 import 'package:flutter/material.dart';
 
-class LoadingWidget extends StatelessWidget {
-
+class CustomAlertWidget extends StatelessWidget {
+  final Widget widget;
   final Color? backgroundColor;
-  const LoadingWidget({
-    super.key, 
+  const CustomAlertWidget({
+    super.key,
+    required this.widget,
     this.backgroundColor,
   });
 
@@ -34,11 +35,10 @@ class LoadingWidget extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: Container(
-                width: 60.w(context),
-                height: 20.h(context),
+                width: 80.w(context),
                 decoration: BoxDecoration(color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor, borderRadius: BorderRadius.circular(10.0)),
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                child: const Center(child: CircularProgressIndicator(),),
+                child: widget,
               ),
             ),
           ),

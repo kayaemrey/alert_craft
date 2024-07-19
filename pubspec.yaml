@@ -1,6 +1,6 @@
 name: alert_craft
 description: "Alert Craft simplifies customizable notification and selection dialogs for Flutter. Use OverlayService for notifications and choice prompts."
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/kayaemrey/alert_craft
 repository: https://github.com/kayaemrey/alert_craft
 

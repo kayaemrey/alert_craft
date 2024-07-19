@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:alert_craft/service/overlay_service.dart';
-import 'package:alert_craft/service/screen_responsive_size.dart';
+import 'package:alert_craft/core/screen_responsive_size.dart';
 import 'package:flutter/material.dart';
 
 class SelectionWidget extends StatelessWidget {

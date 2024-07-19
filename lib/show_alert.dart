@@ -70,8 +70,12 @@ class ShowAlert {
     ));
   }
 
-  void showCustomAlert(BuildContext context, Widget widget) {
+  void showCustomDialog(Widget widget) {
     OverlayService().showCustomOverlay(child: widget);
+  }
+
+  void showCustomAlert(Widget widget) {
+    OverlayService().showCustomOverlay(child: CustomAlertWidget(widget: widget));
   }
 
   void closeAlert() {

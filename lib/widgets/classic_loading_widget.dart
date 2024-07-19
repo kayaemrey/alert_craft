@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../service/app_info.dart';
+import '../core/app_info.dart';
 
 class ClassicLoadingOverlay extends StatelessWidget {
   final ValueNotifier<OverlayEntry?> overlayEntry;
