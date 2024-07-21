@@ -1,123 +1,124 @@
-# Alert Craft Flutter Package
+# alert_craft
 
-Alert Craft is a Flutter package designed to simplify the creation of customizable notification and selection dialogs for your Flutter applications. It provides intuitive APIs and pre-built components to enhance user interaction through clear and customizable alerts.
+`alert_craft` is a Flutter package for managing various types of overlays and alerts in your Flutter application. It provides a simple API for displaying alert dialogs, loading dialogs, selection dialogs, toast messages, and custom widgets.
 
 ## Features
 
-- **showAlertDialog**:
-- **showLoadingDialog**:
-- **showSelectionDialog**:
-- **showToastMessage**:
-- **showCustomAlert**:
-- **closeAlert**:
+- **Show Alert Dialog**: Display customizable alert dialogs.
+- **Show Loading Dialog**: Show a loading indicator.
+- **Show Selection Dialog**: Display a dialog with selectable options.
+- **Show Toast Message**: Show non-intrusive toast messages.
+- **Show Custom Dialog**: Display custom widgets in dialogs.
+- **Show Custom Alert**: Display custom alerts with custom widgets.
+- **Close Alert**: Close the currently displayed overlay or alert.
 
-**Description:** Shows an alert dialog overlay with customizable title, description, and button options.
+## Usage
 
-**Parameters:**
-- `context` (required): The build context where the dialog will be shown.
-- `type` (required): Integer representing the type of alert.
-- `title` (required): Title text displayed in the alert dialog.
-- `description` (required): Description text displayed in the alert dialog.
-- `buttonColor` (optional): Color of the button in the alert dialog.
-- `buttonText` (optional): Text displayed on the button in the alert dialog.
-- `buttonTextColor` (optional): Text color of the button in the alert dialog.
-- `backgroundColor` (optional): Background color of the alert dialog.
+### Show Alert Dialog
 
-**Usage Example:**
+Displays a customizable alert dialog with a title, description, and optional button styling.
+
 ```dart
-ShowAlert().showAlertDialog(
-  context: context,
-  type: 1,
-  title: 'Alert',
-  description: 'This is an alert message.',
-  buttonColor: Colors.blue,
-  buttonText: 'OK',
-  buttonTextColor: Colors.white,
-  backgroundColor: Colors.grey[200],
-);
+import 'package:alert_craft/alert_craft.dart';
 
-**Description:** Shows a loading dialog overlay.
+void showAlert() {
+  ShowAlert().showAlertDialog(
+    type: 1,
+    title: 'Alert Title',
+    description: 'This is an alert description.',
+    buttonColor: Colors.blue,
+    buttonText: 'OK',
+    buttonTextColor: Colors.white,
+    backgroundColor: Colors.black,
+  );
+}
 
-**Parameters:**
-- `context` (required): The build context where the loading dialog will be shown.
-
-**Usage Example:**
+Show Loading Dialog
+Shows a loading indicator on top of the current screen.
 ```dart
-ShowAlert().showLoadingDialog(context);
+import 'package:alert_craft/alert_craft.dart';
 
-**Description:** Shows a selection dialog overlay with customizable title, description, and button options.
+void showLoading(BuildContext context) {
+  ShowAlert().showLoadingDialog(context);
+}
 
-**Parameters:**
-- `context` (required): The build context where the dialog will be shown.
-- `type` (required): Integer representing the type of selection dialog.
-- `title` (required): Title text displayed in the selection dialog.
-- `description` (required): Description text displayed in the selection dialog.
-- `buttonTextLeft` (optional): Text displayed on the left button in the selection dialog.
-- `buttonTextRight` (optional): Text displayed on the right button in the selection dialog.
-- `buttonColor` (optional): Color of the buttons in the selection dialog.
-- `buttonTextColor` (optional): Text color of the buttons in the selection dialog.
-- `backgroundColor` (optional): Background color of the selection dialog.
-- `leftFunction` (optional): Function called when the left button is pressed.
-- `rightFunction` (optional): Function called when the right button is pressed.
+Show Selection Dialog
+Displays a dialog with options and custom button actions.
 
-**Usage Example:**
 ```dart
-ShowAlert().showSelectionDialog(
-  context: context,
-  type: 2,
-  title: 'Confirmation',
-  description: 'Are you sure you want to proceed?',
-  buttonTextLeft: 'Cancel',
-  buttonTextRight: 'Yes',
-  buttonColor: Colors.green,
-  buttonTextColor: Colors.white,
-  backgroundColor: Colors.grey[200],
-  leftFunction: () {
-    // Handle cancellation logic here
-    ShowAlert().closeAlert();
-  },
-  rightFunction: () {
-    // Handle confirmation logic here
-    ShowAlert().closeAlert();
-  },
-);
+import 'package:alert_craft/alert_craft.dart';
 
-**Description:** Shows a toast message overlay with customizable title, description, and background color.
+void showSelection() {
+  ShowAlert().showSelectionDialog(
+    type: 1,
+    title: 'Select an Option',
+    description: 'Choose an option below.',
+    buttonTextLeft: 'Cancel',
+    buttonTextRight: 'Confirm',
+    leftFunction: () {
+      // Handle left button action
+    },
+    rightFunction: () {
+      // Handle right button action
+    },
+  );
+}
 
-**Parameters:**
-- `context` (required): The build context where the toast message will be shown.
-- `type` (required): Integer representing the type of toast message.
-- `title` (required): Title text displayed in the toast message.
-- `description` (required): Description text displayed in the toast message.
-- `backgroundColor` (optional): Background color of the toast message.
 
-**Usage Example:**
+Show Toast Message
+Shows a non-intrusive toast message with a title and description.
+
 ```dart
-ShowAlert().showToastMessage(
-  context: context,
-  type: 3,
-  title: 'Success!',
-  description: 'Operation completed successfully.',
-  backgroundColor: Colors.green,
-);
+import 'package:alert_craft/alert_craft.dart';
 
-**Description:** Show Custom alert.
+void showToast() {
+  ShowAlert().showToastMessage(
+    type: 1,
+    title: 'Toast Title',
+    description: 'This is a toast message.',
+    backgroundColor: Colors.green,
+  );
+}
 
-**Usage Example:**
+Show Custom Dialog
+Displays a custom widget inside a dialog.
+
 ```dart
-ShowAlert().showCustomAlert();
+import 'package:alert_craft/alert_craft.dart';
 
-**Description:** Closes the currently displayed alert overlay.
+void showCustomDialog() {
+  ShowAlert().showCustomDialog(
+    MyCustomWidget(), // Replace with your custom widget
+  );
+}
 
-**Usage Example:**
+Show Custom Alert
+Displays a custom alert with your own widget.
+
 ```dart
-ShowAlert().closeAlert();
+import 'package:alert_craft/alert_craft.dart';
+
+void showCustomAlert() {
+  ShowAlert().showCustomAlert(
+    MyCustomAlertWidget(), // Replace with your custom alert widget
+  );
+}
+
+Close Alert
+Closes the currently displayed overlay or alert.
+
+```dart
+import 'package:alert_craft/alert_craft.dart';
+
+void closeAlert() {
+  ShowAlert().closeAlert();
+}
 
 
 ## Installation
 
-Add the following dependency to your `pubspec.yaml`:
+Add `alert_craft` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  alert_craft: ^1.0.0  # Replace with the latest version
+  alert_craft: ^1.0.0
