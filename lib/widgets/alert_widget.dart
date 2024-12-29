@@ -95,7 +95,7 @@ class AlertDialogWidget extends StatelessWidget {
                     ),
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
                     Padding(

@@ -96,7 +96,7 @@ class _ToastMessageWidgetState extends State<ToastMessageWidget> {
                       children: [
                         Text(
                           widget.title,
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
                         ),
                         Padding(
