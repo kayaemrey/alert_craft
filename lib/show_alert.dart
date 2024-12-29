@@ -23,7 +23,7 @@ class ShowAlert {
     );
   }
 
-  void showLoadingDialog(BuildContext context) {
+  void showLoadingDialog() {
     OverlayService().showCustomOverlay(child: const LoadingWidget());
   }
 

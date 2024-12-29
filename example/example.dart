@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:alert_craft/alert_craft.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,11 +20,13 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   final ShowAlert _showAlert = ShowAlert();
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alert Craft Example'),
+        title: const Text('Alert Craft Example'),
       ),
       body: Center(
         child: Column(
@@ -40,13 +44,13 @@ class HomeScreen extends StatelessWidget {
                   backgroundColor: Colors.grey[200],
                 );
               },
-              child: Text('Show Alert Dialog'),
+              child: const Text('Show Alert Dialog'),
             ),
             ElevatedButton(
               onPressed: () {
-                _showAlert.showLoadingDialog(context);
+                _showAlert.showLoadingDialog();
               },
-              child: Text('Show Loading Dialog'),
+              child: const Text('Show Loading Dialog'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -59,11 +63,11 @@ class HomeScreen extends StatelessWidget {
                   buttonColor: Colors.green,
                   buttonTextColor: Colors.white,
                   backgroundColor: Colors.white,
-                  leftFunction: () => print('Cancelled'),
-                  rightFunction: () => print('Confirmed'),
+                  leftFunction: () {},
+                  rightFunction: () {} ,
                 );
               },
-              child: Text('Show Selection Dialog'),
+              child: const Text('Show Selection Dialog'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -74,15 +78,15 @@ class HomeScreen extends StatelessWidget {
                   backgroundColor: Colors.black,
                 );
               },
-              child: Text('Show Toast Message'),
+              child: const Text('Show Toast Message'),
             ),
             ElevatedButton(
               onPressed: () {
                 _showAlert.showCustomDialog(
-                  CustomDialogWidget(),
+                  const CustomDialogWidget(),
                 );
               },
-              child: Text('Show Custom Dialog'),
+              child: const Text('Show Custom Dialog'),
             ),
           ],
         ),
@@ -92,15 +96,17 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomDialogWidget extends StatelessWidget {
+  const CustomDialogWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Custom Dialog'),
-      content: Text('This is a custom dialog example.'),
+      title: const Text('Custom Dialog'),
+      content: const Text('This is a custom dialog example.'),
       actions: [
         TextButton(
           onPressed: () => OverlayService().closeOverlay(),
-          child: Text('Close'),
+          child: const Text('Close'),
         ),
       ],
     );

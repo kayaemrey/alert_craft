@@ -4,7 +4,7 @@ import '../core/app_info.dart';
 
 class ClassicLoadingOverlay extends StatelessWidget {
   final ValueNotifier<OverlayEntry?> overlayEntry;
-  ClassicLoadingOverlay({
+  const ClassicLoadingOverlay({super.key, 
     required this.overlayEntry,
   });
 

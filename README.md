@@ -12,14 +12,11 @@
 - **Show Custom Alert**: Display custom alerts with custom widgets.
 - **Close Alert**: Close the currently displayed overlay or alert.
 
-## Usage
-
 ### Show Alert Dialog
 
 Displays a customizable alert dialog with a title, description, and optional button styling.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void showAlert() {
   ShowAlert().showAlertDialog(
@@ -32,22 +29,24 @@ void showAlert() {
     backgroundColor: Colors.black,
   );
 }
+```
 
-Show Loading Dialog
+### Show Loading Dialog
+
 Shows a loading indicator on top of the current screen.
+
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void showLoading(BuildContext context) {
   ShowAlert().showLoadingDialog(context);
 }
+```
 
-Show Selection Dialog
+### Show Selection Dialog
+
 Displays a dialog with options and custom button actions.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
-
 void showSelection() {
   ShowAlert().showSelectionDialog(
     type: 1,
@@ -63,13 +62,13 @@ void showSelection() {
     },
   );
 }
+```
 
+### Show Toast Message
 
-Show Toast Message
 Shows a non-intrusive toast message with a title and description.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void showToast() {
   ShowAlert().showToastMessage(
@@ -79,41 +78,44 @@ void showToast() {
     backgroundColor: Colors.green,
   );
 }
+```
 
-Show Custom Dialog
+### Show Custom Dialog
+
 Displays a custom widget inside a dialog.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void showCustomDialog() {
   ShowAlert().showCustomDialog(
     MyCustomWidget(), // Replace with your custom widget
   );
 }
+```
 
-Show Custom Alert
+### Show Custom Alert
+
 Displays a custom alert with your own widget.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void showCustomAlert() {
   ShowAlert().showCustomAlert(
     MyCustomAlertWidget(), // Replace with your custom alert widget
   );
 }
+```
 
-Close Alert
+### Close Alert
+
 Closes the currently displayed overlay or alert.
 
 ```dart
-import 'package:alert_craft/alert_craft.dart';
 
 void closeAlert() {
   ShowAlert().closeAlert();
 }
-
+```
 
 ## Installation
 
