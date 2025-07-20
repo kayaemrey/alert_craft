@@ -46,7 +46,7 @@ class ShowAlert {
         description: description,
         buttonTextLeft: buttonTextLeft,
         buttonTextRight: buttonTextRight,
-        buttonColor: buttonColor,
+        buttonColorRight: buttonColor,
         buttonTextColor: buttonTextColor,
         backgroundColor: backgroundColor,
         leftFunction: leftFunction ?? () => OverlayService().closeOverlay(),
@@ -68,10 +68,6 @@ class ShowAlert {
       description: description,
       backgroundColor: backgroundColor,
     ));
-  }
-
-  void showCustomDialog(Widget widget) {
-    OverlayService().showCustomOverlay(child: widget);
   }
 
   void showCustomAlert(Widget widget) {

@@ -80,14 +80,6 @@ class HomeScreen extends StatelessWidget {
               },
               child: const Text('Show Toast Message'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                _showAlert.showCustomDialog(
-                  const CustomDialogWidget(),
-                );
-              },
-              child: const Text('Show Custom Dialog'),
-            ),
           ],
         ),
       ),

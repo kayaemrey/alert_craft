@@ -7,7 +7,8 @@ class SelectionWidget extends StatelessWidget {
   final int type;
   final String title;
   final String description;
-  final Color? buttonColor;
+  final Color? buttonColorLeft;
+  final Color? buttonColorRight;
   final String? buttonTextLeft;
   final String? buttonTextRight;
   final Color? buttonTextColor;
@@ -19,7 +20,8 @@ class SelectionWidget extends StatelessWidget {
     required this.type,
     required this.title,
     required this.description,
-    this.buttonColor,
+    this.buttonColorLeft,
+    this.buttonColorRight,
     this.buttonTextColor,
     this.buttonTextLeft,
     this.buttonTextRight,
@@ -30,6 +32,8 @@ class SelectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sizer = ScreenSizer(context);
+
     Color color = Colors.green;
     switch (type) {
       case 1:
@@ -56,6 +60,23 @@ class SelectionWidget extends StatelessWidget {
         break;
     }
 
+    // Responsive ölçüler
+    final double dialogWidth = sizer.wp(80); // %80 genişlik
+    final double borderRadius = sizer.wp(4); // %4 genişlik kadar radius
+    final double verticalPadding = sizer.hp(2); // %2 dikey padding
+    final double horizontalPadding = sizer.wp(4); // %4 yatay padding
+
+    final double iconContainer = sizer.wp(14); // ikon kutusu
+    final double iconSize = sizer.wp(8); // ikon boyutu
+
+    final double buttonWidth = sizer.wp(32); // buton genişliği
+    final double buttonHeight = sizer.hp(5); // buton yüksekliği
+
+    final double sizedBoxSmall = sizer.hp(1.3);
+    final double sizedBoxMedium = sizer.hp(1.5);
+
+    final double textPaddingVertical = sizer.hp(1);
+
     return Positioned.fill(
       child: Stack(
         children: [
@@ -77,67 +98,93 @@ class SelectionWidget extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: Container(
-                width: 80.w(context),
-                decoration: BoxDecoration(color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor, borderRadius: BorderRadius.circular(10.0)),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                width: dialogWidth,
+                decoration: BoxDecoration(
+                  color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(borderRadius),
+                ),
+                padding: EdgeInsets.symmetric(
+                  vertical: verticalPadding,
+                  horizontal: horizontalPadding,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      height: 1.3.h(context),
-                    ),
+                    SizedBox(height: sizedBoxSmall),
                     Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+                      width: iconContainer,
+                      height: iconContainer,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(borderRadius * 0.8),
+                      ),
                       child: Icon(
                         icon,
-                        size: 36,
+                        size: iconSize,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      height: 1.5.h(context),
-                    ),
+                    SizedBox(height: sizedBoxMedium),
                     Text(
                       title,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(description, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
+                      padding: EdgeInsets.symmetric(vertical: textPaddingVertical),
+                      child: Text(
+                        description,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                      ),
                     ),
-                    SizedBox(
-                      height: 1.3.h(context),
-                    ),
+                    SizedBox(height: sizedBoxSmall),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        OutlinedButton(
-                          style: ElevatedButton.styleFrom(minimumSize: const Size(60, 38), maximumSize: const Size(120, 38)),
-                          onPressed: leftFunction == null || leftFunction == () {}
-                              ? () {
-                                  OverlayService().closeOverlay();
-                                }
-                              : leftFunction,
-                          child: Text(buttonTextLeft ?? 'Close', style: TextStyle(color: buttonColor ?? Colors.blue)),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: buttonColorLeft ?? Theme.of(context).primaryColor,
+                            minimumSize: Size(buttonWidth, buttonHeight),
+                            maximumSize: Size(buttonWidth, buttonHeight),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(borderRadius),
+                            ),
+                          ),
+                          onPressed: leftFunction ??
+                              () {
+                                OverlayService().closeOverlay();
+                              },
+                          child: Text(
+                            buttonTextLeft ?? 'Close',
+                            style: TextStyle(
+                              color: buttonTextColor ?? Colors.white,
+                            ),
+                          ),
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: buttonColor ?? Theme.of(context).primaryColor, minimumSize: const Size(60, 38), maximumSize: const Size(120, 38)),
-                          onPressed: rightFunction == null || leftFunction == () {}
-                              ? () {
-                                  OverlayService().closeOverlay();
-                                }
-                              : rightFunction,
-                          child: Text(buttonTextRight ?? 'Ok', style: TextStyle(color: buttonColor ?? Colors.white)),
+                            backgroundColor: buttonColorRight ?? Theme.of(context).primaryColor,
+                            minimumSize: Size(buttonWidth, buttonHeight),
+                            maximumSize: Size(buttonWidth, buttonHeight),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(borderRadius),
+                            ),
+                          ),
+                          onPressed: rightFunction ??
+                              () {
+                                OverlayService().closeOverlay();
+                              },
+                          child: Text(
+                            buttonTextRight ?? 'Ok',
+                            style: TextStyle(
+                              color: buttonTextColor ?? Colors.white,
+                            ),
+                          ),
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h(context),
-                    ),
+                    SizedBox(height: sizer.hp(1)),
                   ],
                 ),
               ),

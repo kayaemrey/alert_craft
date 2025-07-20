@@ -11,6 +11,7 @@ class AlertDialogWidget extends StatelessWidget {
   final String? buttonText;
   final Color? buttonTextColor;
   final Color? backgroundColor;
+
   const AlertDialogWidget({
     super.key,
     required this.type,
@@ -24,31 +25,36 @@ class AlertDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Colors.green;
+    final sizer = ScreenSizer(context);
+
+    Color color;
+    IconData icon;
     switch (type) {
       case 1:
         color = Colors.green;
-        break;
-      case 2:
-        color = Colors.red;
-        break;
-      default:
-        color = Colors.orange;
-        break;
-    }
-
-    IconData icon = Icons.info_outline_rounded;
-    switch (type) {
-      case 1:
         icon = Icons.check_circle_outline_rounded;
         break;
       case 2:
+        color = Colors.red;
         icon = Icons.block_rounded;
         break;
       default:
+        color = Colors.orange;
         icon = Icons.info_outline_rounded;
         break;
     }
+
+    // Responsive ölçüler
+    final double dialogWidth = sizer.wp(80);
+    final double iconSize = sizer.wp(12);
+    final double iconContainer = sizer.wp(16);
+    final double borderRadius = sizer.wp(4);
+    final double buttonWidth = sizer.wp(32);
+    final double buttonHeight = sizer.hp(5);
+
+    // Responsive padding
+    final double verticalPadding = sizer.hp(2); // %2 dikey padding
+    final double horizontalPadding = sizer.wp(4); // %4 yatay padding
 
     return Positioned.fill(
       child: Stack(
@@ -71,51 +77,77 @@ class AlertDialogWidget extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: Container(
-                width: 80.w(context),
-                decoration: BoxDecoration(color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor, borderRadius: BorderRadius.circular(10.0)),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                width: dialogWidth,
+                decoration: BoxDecoration(
+                  color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(borderRadius),
+                ),
+                padding: EdgeInsets.symmetric(
+                  vertical: verticalPadding,
+                  horizontal: horizontalPadding,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      height: 1.3.h(context),
-                    ),
+                    SizedBox(height: sizer.hp(1.3)),
                     Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+                      width: iconContainer,
+                      height: iconContainer,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(borderRadius),
+                      ),
                       child: Icon(
                         icon,
-                        size: 36,
+                        size: iconSize,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      height: 1.5.h(context),
-                    ),
+                    SizedBox(height: sizer.hp(1.5)),
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(description, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
+                      padding: EdgeInsets.symmetric(
+                        vertical: sizer.hp(1), // responsive vertical padding
+                      ),
+                      child: Text(
+                        description,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      height: 1.3.h(context),
-                    ),
+                    SizedBox(height: sizer.hp(1.3)),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: buttonColor ?? Theme.of(context).primaryColor, minimumSize: const Size(120, 38), maximumSize: const Size(120, 38)),
+                        backgroundColor: buttonColor ?? Theme.of(context).primaryColor,
+                        minimumSize: Size(buttonWidth, buttonHeight),
+                        maximumSize: Size(buttonWidth, buttonHeight),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(borderRadius),
+                        ),
+                      ),
                       onPressed: () {
                         OverlayService().closeOverlay();
                       },
-                      child: Text(buttonText ?? 'Ok', style: TextStyle(color: buttonColor ?? Colors.white)),
+                      child: Text(
+                        buttonText ?? 'Ok',
+                        style: TextStyle(
+                          color: buttonTextColor ?? Colors.white,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      height: 1.h(context),
-                    )
+                    SizedBox(height: sizer.hp(1)),
                   ],
                 ),
               ),

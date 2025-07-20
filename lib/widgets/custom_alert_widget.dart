@@ -14,6 +14,14 @@ class CustomAlertWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sizer = ScreenSizer(context);
+
+    // Responsive ölçüler
+    final double dialogWidth = sizer.wp(80); // %80 genişlik
+    final double borderRadius = sizer.wp(4); // %4 genişlik kadar radius
+    final double verticalPadding = sizer.hp(2); // %2 dikey padding
+    final double horizontalPadding = sizer.wp(4); // %4 yatay padding
+
     return Positioned.fill(
       child: Stack(
         children: [
@@ -35,10 +43,21 @@ class CustomAlertWidget extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: Container(
-                width: 80.w(context),
-                decoration: BoxDecoration(color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor, borderRadius: BorderRadius.circular(10.0)),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                child: widget,
+                width: dialogWidth,
+                decoration: BoxDecoration(
+                  color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(borderRadius),
+                ),
+                padding: EdgeInsets.symmetric(
+                  vertical: verticalPadding,
+                  horizontal: horizontalPadding,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    widget,
+                  ],
+                ),
               ),
             ),
           ),

@@ -18,7 +18,6 @@ class ToastMessageWidget extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _ToastMessageWidgetState createState() => _ToastMessageWidgetState();
 }
 
@@ -37,6 +36,8 @@ class _ToastMessageWidgetState extends State<ToastMessageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final sizer = ScreenSizer(context);
+
     Color color = Colors.green;
     switch (widget.type) {
       case 1:
@@ -63,59 +64,62 @@ class _ToastMessageWidgetState extends State<ToastMessageWidget> {
         break;
     }
 
+    // Responsive ölçüler
+    final double borderRadius = sizer.wp(4);
+    final double verticalPadding = sizer.hp(2);
+    final double horizontalPadding = sizer.wp(4);
+    final double iconSize = sizer.wp(10);
+    final double iconRightPadding = sizer.wp(4);
+    final double bottomMargin = sizer.hp(5);
+    final double horizontalMargin = sizer.wp(4);
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30.0),
+      padding: EdgeInsets.only(
+        bottom: bottomMargin,
+        left: horizontalMargin,
+        right: horizontalMargin,
+      ),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: widget.backgroundColor ?? color,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-            child: Row(
-              children: [
-                Row(
+        child: Container(
+          decoration: BoxDecoration(
+            color: widget.backgroundColor ?? color,
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          padding: EdgeInsets.symmetric(
+            vertical: verticalPadding,
+            horizontal: horizontalPadding,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: iconSize,
+                color: Colors.white,
+              ),
+              SizedBox(width: iconRightPadding),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      height: 1.3.h(context),
+                    Text(
+                      widget.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500, color: Colors.white),
                     ),
-                    Icon(
-                      icon,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 5.w(context),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          widget.title,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text(
-                            widget.description,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 1.h(context),
+                    SizedBox(height: sizer.hp(0.5)),
+                    Text(
+                      widget.description,
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500, color: Colors.white),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

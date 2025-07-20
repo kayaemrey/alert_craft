@@ -47,21 +47,15 @@ void showLoading(BuildContext context) {
 Displays a dialog with options and custom button actions.
 
 ```dart
-void showSelection() {
-  ShowAlert().showSelectionDialog(
+ShowAlert().showAlertDialog(
     type: 1,
-    title: 'Select an Option',
-    description: 'Choose an option below.',
-    buttonTextLeft: 'Cancel',
-    buttonTextRight: 'Confirm',
-    leftFunction: () {
-      // Handle left button action
-    },
-    rightFunction: () {
-      // Handle right button action
-    },
+    title: 'Alert Title',
+    description: 'This is an alert description.',
+    buttonColor: Colors.blue,
+    buttonText: 'OK',
+    buttonTextColor: Colors.white,
+    backgroundColor: Colors.black,
   );
-}
 ```
 
 ### Show Toast Message
@@ -70,14 +64,12 @@ Shows a non-intrusive toast message with a title and description.
 
 ```dart
 
-void showToast() {
-  ShowAlert().showToastMessage(
+ShowAlert().showToastMessage(
     type: 1,
     title: 'Toast Title',
     description: 'This is a toast message.',
     backgroundColor: Colors.green,
   );
-}
 ```
 
 ### Show Custom Dialog
@@ -85,12 +77,11 @@ void showToast() {
 Displays a custom widget inside a dialog.
 
 ```dart
-
-void showCustomDialog() {
-  ShowAlert().showCustomDialog(
-    MyCustomWidget(), // Replace with your custom widget
-  );
-}
+ShowAlert().showCustomDialog(
+  Material(
+    child: MyCustomWidget(), // Replace with your custom widget
+  )
+);
 ```
 
 ### Show Custom Alert
@@ -98,12 +89,11 @@ void showCustomDialog() {
 Displays a custom alert with your own widget.
 
 ```dart
-
-void showCustomAlert() {
-  ShowAlert().showCustomAlert(
-    MyCustomAlertWidget(), // Replace with your custom alert widget
-  );
-}
+ShowAlert().showCustomAlert(
+  Material(
+    child: MyCustomAlertWidget(), // Replace with your custom alert widget
+  )
+);
 ```
 
 ### Close Alert
@@ -111,10 +101,7 @@ void showCustomAlert() {
 Closes the currently displayed overlay or alert.
 
 ```dart
-
-void closeAlert() {
-  ShowAlert().closeAlert();
-}
+ShowAlert().closeAlert();
 ```
 
 ## Installation
@@ -123,4 +110,4 @@ Add `alert_craft` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  alert_craft: ^1.0.0
+  alert_craft: ^0.0.14
