@@ -20,7 +20,7 @@ Displays a customizable alert dialog with a title, description, and optional but
 
 void showAlert() {
   ShowAlert().showAlertDialog(
-    type: 1,
+    type: AlertType.warning,
     title: 'Alert Title',
     description: 'This is an alert description.',
     buttonColor: Colors.blue,
@@ -48,7 +48,7 @@ Displays a dialog with options and custom button actions.
 
 ```dart
 ShowAlert().showAlertDialog(
-    type: 1,
+    type: AlertType.warning,
     title: 'Alert Title',
     description: 'This is an alert description.',
     buttonColor: Colors.blue,
@@ -65,7 +65,7 @@ Shows a non-intrusive toast message with a title and description.
 ```dart
 
 ShowAlert().showToastMessage(
-    type: 1,
+    type: AlertType.warning,
     title: 'Toast Title',
     description: 'This is a toast message.',
     backgroundColor: Colors.green,
@@ -110,4 +110,4 @@ Add `alert_craft` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  alert_craft: ^0.0.14
+  alert_craft: ^0.0.15

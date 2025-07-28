@@ -2,7 +2,7 @@ part of 'alert_craft.dart';
 
 class ShowAlert {
   void showAlertDialog({
-    required int type,
+    required AlertType type,
     required String title,
     required String description,
     Color? buttonColor,
@@ -28,7 +28,7 @@ class ShowAlert {
   }
 
   void showSelectionDialog({
-    required int type,
+    required AlertType type,
     required String title,
     required String description,
     String buttonTextLeft = 'Close',
@@ -47,7 +47,6 @@ class ShowAlert {
         buttonTextLeft: buttonTextLeft,
         buttonTextRight: buttonTextRight,
         buttonColorRight: buttonColor,
-        buttonTextColor: buttonTextColor,
         backgroundColor: backgroundColor,
         leftFunction: leftFunction ?? () => OverlayService().closeOverlay(),
         rightFunction: rightFunction ?? () => OverlayService().closeOverlay(),
@@ -56,7 +55,7 @@ class ShowAlert {
   }
 
   void showToastMessage({
-    required int type,
+    required AlertType type,
     required String title,
     required String description,
     Color? backgroundColor,
@@ -71,7 +70,7 @@ class ShowAlert {
   }
 
   void showCustomAlert(Widget widget) {
-    OverlayService().showCustomOverlay(child: CustomAlertWidget(widget: widget));
+    OverlayService().showCustomOverlay(child: CustomAlertWidget(child: widget));
   }
 
   void closeAlert() {
